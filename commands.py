@@ -1,3 +1,5 @@
+from icons import *
+
 
 class BotManager:
     def __init__(self, bot):
@@ -25,6 +27,8 @@ class BotManager:
 
     def cmd_ciao(self, chat_id, text, **kw):
         username = kw.get('username', "carissimo")
-        msg = "Ma ciao {username}, benvenuto al CircuSpring 2020!"
+        msg = "Ma ciao {username}, benvenuto al CircuSpring 2020! "
         msg = msg.format(username=username)
+        msg = msg.encode()
+        msg += KISSING_HEART
         self.bot.sendMessage(chat_id, msg)
