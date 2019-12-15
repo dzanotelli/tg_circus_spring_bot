@@ -1,0 +1,8 @@
+# Editors and backups
+.idea
+\#*#
+*~
+
+# Python related
+*pyc
+__pycache__
