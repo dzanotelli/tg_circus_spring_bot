@@ -1,0 +1,10 @@
+# Create a `config.ini` file with the needed configuration to boot the project.
+# Alternatively you can rename this file as you wish and set the environment
+# variable `CS_BOT_CONF_FILE=path/to/my_conf_file.ini`
+
+[telegram]
+
+# isseud by @botfather
+# check https://core.telegram.org/bots for more
+API_KEY=
+

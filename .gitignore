@@ -6,3 +6,6 @@
 # Python related
 *pyc
 __pycache__
+
+# Project related
+config.ini
