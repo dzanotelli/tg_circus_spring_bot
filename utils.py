@@ -35,7 +35,8 @@ def read_config():
             'api_key': parser['telegram']['api_key'],
         }
     except KeyError as e:
-        err = f"Bad configuration provided (file {conf_path}). Details: {e}"
+        err = "Bad configuration provided (file {conf_path}). Details: {e}"
+        err = err.format(conf_path=conf_path, e=e)
         log.error(err)
         raise CircuSpringBotConfError(err)
 

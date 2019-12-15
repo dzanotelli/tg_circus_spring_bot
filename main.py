@@ -14,7 +14,7 @@ try:
     bot = Bot(conf['api_key'])
     manager = BotManager(bot)
 except Exception as e:
-    err = f"Error while initing Bot. Details: {e}"
+    err = "Error while initing Bot. Details: {e}".format(e=e)
     log.critical(err)
     raise CircuSpringInitBotError(err)
 
@@ -23,7 +23,7 @@ def handle(msg):
     chat_id = msg['chat']['id']
     text = msg['text']
     username = msg['from']['username']
-    log.debug(f"input: {text}")
+    log.debug("input: {text}".format(text=text))
 
     cmd = text.split()[0] if len(text.split()) else None
     text = text[len(cmd):] if cmd else ''
