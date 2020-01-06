@@ -1,10 +1,13 @@
 # Create a `config.ini` file with the needed configuration to boot the project.
-# Alternatively you can rename this file as you wish and set the environment
+# Alternatively you can use the filename you prefer and set the environment
 # variable `CS_BOT_CONF_FILE=path/to/my_conf_file.ini`
 
-[telegram]
+[general]
+# Enables dev mode (logging DEBUG will be turned on)
+#DEV=True
 
-# isseud by @botfather
-# check https://core.telegram.org/bots for more
+[telegram]
+# Issued by @botfather
+# Check https://core.telegram.org/bots for more
 API_KEY=
 

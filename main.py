@@ -7,11 +7,12 @@ from exceptions import CircuSpringInitBotError
 from utils import init_logger, read_config
 
 
-log = init_logger()
 conf = read_config()
+dev_mode = conf['general'].get('DEV', False)
+log = init_logger(dev_mode=dev_mode)
 
 try:
-    bot = Bot(conf['api_key'])
+    bot = Bot(conf['telegram']['api_key'])
     manager = BotManager(bot)
 except Exception as e:
     err = "Error while initing Bot. Details: {e}".format(e=e)
@@ -20,6 +21,7 @@ except Exception as e:
 
 
 def handle(msg):
+    log.debug("echo: {}".format(msg))
     chat_id = msg['chat']['id']
     text = msg['text']
     username = msg['from']['username']
@@ -34,7 +36,8 @@ def handle(msg):
 
 
 # start main routine
-msg = "Starting CircuSpringBot ..."
+msg = "::: DEV ::: " if dev_mode else ""
+msg += "Starting CircuSpringBot ..."
 log.info(msg)
 print(msg)
 MessageLoop(bot, handle).run_as_thread()

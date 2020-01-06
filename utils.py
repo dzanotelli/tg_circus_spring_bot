@@ -8,19 +8,24 @@ from exceptions import CircuSpringBotConfError
 log = logging.getLogger(__name__)
 
 
-def init_logger():
+def init_logger(dev_mode=False):
     # formatters
     fmt = "%(asctime)s [%(levelname)s:%(module)s:%(lineno)d] %(message)s"
-    formatter = logging.Formatter(fmt)
+    formatter = logging.Formatter(fmt=fmt)
 
     # handlers
     h = logging.StreamHandler()
     h.setLevel(logging.DEBUG)
-    h.setFormatter(fmt)
+    h.setFormatter(formatter)
 
     # loggers
     logger = logging.getLogger(__name__)
     logger.addHandler(h)
+
+    if dev_mode:
+        for h in logger.handlers:
+            h.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
 
     return logger
 
@@ -29,15 +34,4 @@ def read_config():
     parser = configparser.ConfigParser()
     conf_path = os.environ.get('CS_BOT_CONFIG_FILE', 'config.ini')
     parser.read(conf_path)
-
-    try:
-        data = {
-            'api_key': parser['telegram']['api_key'],
-        }
-    except KeyError as e:
-        err = "Bad configuration provided (file {conf_path}). Details: {e}"
-        err = err.format(conf_path=conf_path, e=e)
-        log.error(err)
-        raise CircuSpringBotConfError(err)
-
-    return data
+    return parser
